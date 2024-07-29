@@ -2,40 +2,113 @@
 export interface LeveledSummary {
 	content: string;
 	source: LeveledSummary[];
+    key: string
 }
 
 export const example: LeveledSummary[] = [
 	{
-		content: "1",
+		content: "summary",
 		source: [
-			{ content: "1.1", source: [] },
-			{ content: "1.2", source: [] },
-			{ content: "1.3", source: [] },
+			{
+				content:
+					"In publishing and graphic design, Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/) is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication, without the meaning of the text influencing the design.",
+				source: [],
+				key: "1.1",
+			},
+			{
+				content:
+					"In publishing and graphic design, Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/) is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication, without the meaning of the text influencing the design.",
+				source: [],
+				key: "1.2",
+			},
+			{
+				content:
+					"In publishing and graphic design, Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/) is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication, without the meaning of the text influencing the design.",
+				source: [],
+				key: "1.3",
+			},
 		],
+		key: "1",
 	},
 	{
-		content: "2",
+		content: "summary",
 		source: [
-			{ content: "2.1", source: [] },
-			{ content: "2.2", source: [] },
-			{ content: "2.3", source: [] },
+			{
+				content:
+					"In publishing and graphic design, Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/) is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication, without the meaning of the text influencing the design.",
+				source: [],
+				key: "2.1",
+			},
+			{
+				content:
+					"In publishing and graphic design, Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/) is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication, without the meaning of the text influencing the design.",
+				source: [],
+				key: "2.2",
+			},
+			{
+				content:
+					"In publishing and graphic design, Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/) is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication, without the meaning of the text influencing the design.",
+				source: [],
+				key: "2.3",
+			},
 		],
+		key: "2",
 	},
 	{
-		content: "3",
+		content:
+			"summary yo summary yo summary yo summary yo summary yo summary yo summary yo summary yo",
 		source: [
-			{ content: "3.1", source: [] },
-			{ content: "3.2", source: [] },
-			{ content: "3.3", source: [] },
+			{
+				content:
+					"In publishing and graphic design, Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/) is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication, without the meaning of the text influencing the design.",
+				source: [],
+				key: "3.1",
+			},
+			{
+				content:
+					"In publishing and graphic design, Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/) is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication, without the meaning of the text influencing the design.",
+				source: [],
+				key: "3.2",
+			},
+			{
+				content:
+					"In publishing and graphic design, Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/) is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication, without the meaning of the text influencing the design.",
+				source: [],
+				key: "3.3",
+			},
 		],
+		key: "3",
 	},
+    {
+        content: "summary",
+        source: [
+            {
+                content: "In publishing and graphic design, Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/) is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication, without the meaning of the text influencing the design.",
+                source: [],
+                key: "4.1",
+            },
+            {
+                content: "In publishing and graphic design, Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/) is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication, without the meaning of the text influencing the design.",
+                source: [],
+                key: "4.2",
+            },
+            {
+                content: "In publishing and graphic design, Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/) is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication, without the meaning of the text influencing the design.",
+                source: [],
+                key: "4.3",
+            },
+        ],
+        key: "4",
+    }
 ];
+
 
 export const getLevel = (level: 1 | 2): LeveledSummary[] => {
 	if (level === 1) {
-		return example.map(({ content }) => ({
+		return example.map(({ content, key }) => ({
 			content,
 			source: [],
+			key,
 		}));
 	}
 
