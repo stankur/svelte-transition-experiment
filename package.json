@@ -23,6 +23,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"flowbite-svelte": "^0.46.15"
+		"flowbite-svelte": "^0.46.15",
+		"gsap": "^3.12.5"
 	}
 }

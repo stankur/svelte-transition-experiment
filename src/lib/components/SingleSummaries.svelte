@@ -1,13 +1,14 @@
 <script lang="ts">
-	import type { LeveledSummary } from "$lib";
-
-    export let leveledSummaries: LeveledSummary[];
+	import type { RefLeveledSummary } from "$lib/utils/RefLeveledSummary";
+    export let refLeveledSummaries: RefLeveledSummary[];
 </script>
 
 <div class="flex flex-col gap-5">
-    {#each leveledSummaries as summary (summary.key)}
+    {#each refLeveledSummaries as {content, ref, key} (key)}
         <p>
-            {summary.content}
+            <span bind:this={ref} data-flip-id={key}>
+            {content}
+            </span>
         </p>
     {/each}
 </div>
