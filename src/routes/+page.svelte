@@ -49,18 +49,24 @@
 
         console.log(refLeveledSummaries)
 
-        const initialState = Flip.getState(refLeveledSummaries.map(({ref}) => ref))
+        gsap.set(refLeveledSummaries.map(({ref}) => ref), {
+            y: -window.scrollY
+        })
+
+        const initialState = Flip.getState(refLeveledSummaries.map(({ref}) => ref), {
+            props: "fontSize, lineHeight, width"
+        })
 
         console.log("initial: ")
         console.log(refLeveledSummaries[1].ref)
 
         await tick()
-        console.log(refLeveledSummaries)
+
 
         Flip.from(initialState, {
             targets: refLeveledSummaries.map(({ref}) => ref),
             absolute: true,
-            props: "fontSize, width, Height"
+            props: "fontSize, lineHeight, width"
         })
 
         console.log("final: ")
@@ -73,27 +79,29 @@
 
 </script>
 
-<div class="flex">
+<div class="flex sticky top-0 pointer-events-auto z-10" on:click={(e) => e.stopPropagation()}>
     <Checkbox bind:checked={checked1}>1</Checkbox>
     <Checkbox bind:checked={checked2} on:click={handleClick}>2</Checkbox>
 </div>
 
-<div class="w-[50vw]">
-{#if checked1 && checked2}
-    <DualSummaries {refLeveledSummaries} />
-{/if}
+    <div class="w-[50vw]">
+    {#if checked1 && checked2}
+        <div class="flex flex-col gap-3">
+            <DualSummaries {refLeveledSummaries} />
+        </div>
+    {/if}
 
-{#if !checked1 && checked2}
-    <SingleSummaries {refLeveledSummaries} />
-{/if}
+    {#if !checked1 && checked2}
+        <SingleSummaries {refLeveledSummaries} />
+    {/if}
 
-{#if checked1 && !checked2}
-    <SingleSummaries {refLeveledSummaries} />
-{/if}
+    {#if checked1 && !checked2}
+        <SingleSummaries {refLeveledSummaries} />
+    {/if}
 
-{#if !checked1 && !checked2}
-    <p>none</p>
-{/if}
-</div>
+    {#if !checked1 && !checked2}
+        <p>none</p>
+    {/if}
+    </div>
 
 

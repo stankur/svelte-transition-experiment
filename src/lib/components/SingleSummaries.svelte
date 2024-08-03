@@ -5,10 +5,8 @@
 
 <div class="flex flex-col gap-5">
     {#each refLeveledSummaries as {content, ref, key} (key)}
-        <p>
-            <span bind:this={ref} data-flip-id={key}>
+        <p bind:this={ref} data-flip-id={key}>
             {content}
-            </span>
         </p>
     {/each}
 </div>

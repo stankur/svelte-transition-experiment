@@ -5,9 +5,11 @@
 </script>
 
 {#each refLeveledSummaries as {key, content, ref, source} (key)}
-    <div class="flex gap-2">
-        <div class="w-[20vw] min-w-[20vw] sticky self-start top-0 text-xs">
-            <span bind:this={ref} data-flip-id={key}>{content}</span>
+    <div class="flex gap-3">
+        <div class="w-[20vw] min-w-[20vw]">
+            <div class="w-[20vw] min-w-[20vw] sticky self-start top-0 text-xs" bind:this={ref} data-flip-id={key}>
+                {content}
+            </div>
         </div>
         <SingleSummaries refLeveledSummaries={source} />
     </div>
