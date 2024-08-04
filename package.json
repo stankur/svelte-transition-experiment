@@ -23,6 +23,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@types/color-hash": "^2.0.0",
+		"color-hash": "^2.0.2",
 		"flowbite-svelte": "^0.46.15",
 		"gsap": "^3.12.5"
 	}

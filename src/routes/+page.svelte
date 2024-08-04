@@ -1,107 +1,62 @@
 <script lang="ts">
-    import {Checkbox} from "flowbite-svelte";
-    import {example, getLevel, type LeveledSummary} from "$lib/index"
-	import SingleSummaries from "$lib/components/SingleSummaries.svelte";
-	import DualSummaries from "$lib/components/DualSummaries.svelte";
-    import type{ RefLeveledSummary} from "$lib/utils/RefLeveledSummary"
-    import {onMount, tick} from "svelte";
-    import { gsap } from "gsap";
-    import { Flip } from "gsap/dist/Flip";
+	import { gsap } from 'gsap'
+	import Flip from 'gsap/dist/Flip'
+
+	import {tick} from "svelte"
+
+	import Dual from "$lib/components/Dual.svelte"
+	import Single from "$lib/components/Single.svelte"
+
+	import { DualDataWithRef } from "$lib/data"
+
+	gsap.registerPlugin(Flip)
+
+	let isDualView = false;
+	let data = DualDataWithRef;
 
 
-    gsap.registerPlugin(Flip);
+	async function toggleView() {
+		isDualView = !isDualView;
 
+            const initialState = Flip.getState(data.map(({ref}) => ref) as HTMLElement[], {
+                props: "fontSize, lineHeight, width"
+            })
 
-    let checked1 = false
-    let checked2 = false
+            console.log(initialState)
 
-    let internalRef: (summ: LeveledSummary[]) =>RefLeveledSummary[] = () => []
+            await tick();
 
-    let refLeveledSummaries: RefLeveledSummary[] = internalRef(example)
-    let document: Document | null = null
+            console.log(data.map(({ref}) => ref))
 
-
-    $: {
-        if (document) {
-            if (checked1 && checked2) {
-                refLeveledSummaries = internalRef(example)
-            } else if (!checked1 && checked2) {
-                refLeveledSummaries = internalRef(getLevel(2))
-            } else if (checked1 && !checked2) {
-                refLeveledSummaries = internalRef(getLevel(1))
-            } else {
-                refLeveledSummaries = []
-            }
-
-        }
-    }
-
-    onMount(async () => {
-        document = window.document
-        internalRef = (await import("$lib/utils/func")).ref
-    })
-
-    async function handleClick() {
-        console.log("--------------------------")
-        console.log(checked2)
-
-        checked2 = !checked2;
-
-        console.log(refLeveledSummaries)
-
-        gsap.set(refLeveledSummaries.map(({ref}) => ref), {
-            y: -window.scrollY
-        })
-
-        const initialState = Flip.getState(refLeveledSummaries.map(({ref}) => ref), {
-            props: "fontSize, lineHeight, width"
-        })
-
-        console.log("initial: ")
-        console.log(refLeveledSummaries[1].ref)
-
-        await tick()
-
-
-        Flip.from(initialState, {
-            targets: refLeveledSummaries.map(({ref}) => ref),
-            absolute: true,
-            props: "fontSize, lineHeight, width"
-        })
-
-        console.log("final: ")
-        console.log(refLeveledSummaries[1].ref)
-
-        console.log(checked2)
-        console.log("--------------------------")
-    }
-
-
+            
+            Flip.from(initialState, {
+                targets: data.map(({ref}) => ref) as HTMLElement[],
+                props: "fontSize, lineHeight, width",
+                duration: 10,
+                ease: "expo.in"
+                // absolute: true
+            })
+		
+	}
 </script>
 
-<div class="flex sticky top-0 pointer-events-auto z-10" on:click={(e) => e.stopPropagation()}>
-    <Checkbox bind:checked={checked1}>1</Checkbox>
-    <Checkbox bind:checked={checked2} on:click={handleClick}>2</Checkbox>
-</div>
+<button class="toggle-button" on:click={toggleView}>
+	toggle
+</button>
 
-    <div class="w-[50vw]">
-    {#if checked1 && checked2}
-        <div class="flex flex-col gap-3">
-            <DualSummaries {refLeveledSummaries} />
-        </div>
-    {/if}
+{#key isDualView}
+	{#if isDualView}
+		<Dual {data} />
+	{:else}
+		<Single {data} />
+	{/if}
+{/key}
 
-    {#if !checked1 && checked2}
-        <SingleSummaries {refLeveledSummaries} />
-    {/if}
-
-    {#if checked1 && !checked2}
-        <SingleSummaries {refLeveledSummaries} />
-    {/if}
-
-    {#if !checked1 && !checked2}
-        <p>none</p>
-    {/if}
-    </div>
+<style>
+	.toggle-button {
+		position: fixed;
+		z-index: 20;
+	}
+</style>
 
 
