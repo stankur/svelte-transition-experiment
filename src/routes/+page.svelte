@@ -27,11 +27,15 @@
 
             const before = document.documentElement.scrollTop
 
+            const topIndex = data.findIndex(({ref}) => (ref as HTMLElement).getBoundingClientRect().top >= 0)
+            const offsetY = (data[topIndex].ref as HTMLElement).getBoundingClientRect().top
+
+
             await tick();
 
             console.log(data.map(({ref}) => ref))
 
-            
+
             Flip.from(initialState, {
                 targets: data.map(({ref}) => ref) as HTMLElement[],
                 props: "fontSize, lineHeight",
@@ -42,7 +46,7 @@
                     gsap.set(document.documentElement, {scrollTop: before})
                 },
                 onUpdate: () => {
-                    gsap.set(window, { scrollTo: { y: data[2].ref as HTMLElement, offsetY: 0 } });
+                    gsap.set(window, { scrollTo: { y: data[topIndex].ref as HTMLElement, offsetY: offsetY } });
 
 
                 }
