@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { gsap } from 'gsap'
 	import Flip from 'gsap/dist/Flip'
+    import ScrollToPlugin from 'gsap/dist/ScrollToPlugin'
 
 	import {tick} from "svelte"
 
@@ -10,6 +11,8 @@
 	import { DualDataWithRef } from "$lib/data"
 
 	gsap.registerPlugin(Flip)
+    gsap.registerPlugin(ScrollToPlugin)
+
 
 	let isDualView = false;
 	let data = DualDataWithRef;
@@ -19,10 +22,10 @@
 		isDualView = !isDualView;
 
             const initialState = Flip.getState(data.map(({ref}) => ref) as HTMLElement[], {
-                props: "fontSize, lineHeight, width"
+                props: "fontSize, lineHeight"
             })
 
-            console.log(initialState)
+            const before = document.documentElement.scrollTop
 
             await tick();
 
@@ -31,10 +34,18 @@
             
             Flip.from(initialState, {
                 targets: data.map(({ref}) => ref) as HTMLElement[],
-                props: "fontSize, lineHeight, width",
-                duration: 10,
-                ease: "expo.in"
-                // absolute: true
+                props: "fontSize, lineHeight",
+                duration: 2,
+                ease: "expo.in",
+                absolute: true,
+                onStart: () => {
+                    gsap.set(document.documentElement, {scrollTop: before})
+                },
+                onUpdate: () => {
+                    gsap.set(window, { scrollTo: { y: data[2].ref as HTMLElement, offsetY: 0 } });
+
+
+                }
             })
 		
 	}
